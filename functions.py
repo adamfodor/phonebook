@@ -71,24 +71,59 @@ def choice(original):
     print("===========")
     choice = int(input("Melyiket szeretne modositani? "))
     if choice == 1:
-        print(f"Régi vezetéknév: {original.vezetek}")
-        original.vezetek = input("Új vezetéknév? ")
+        modify_vezetek(original)
     if choice == 2:
-        print(f"Régi keresztnev: {original.kereszt}")
-        original.keresz = input("Új keresztnév? ")
+        modify_kereszt(original)
     if choice == 3:
-        print(f"Régi neme: {original.nem}")
-        original.nem = input("Új nem? ")
+        modify_nem(original)
     if choice == 4:
-        print(f"Régi telefonszám: {original.szam}")
-        original.szam = input("Új telefonszám? ? ")
+        modify_telefon_szam(original)
     if choice == 5:
-        print(f"Régi munkahely: {original.munkahely}")
-        original.munkahely = input("Új munkahely? ")
+        modify_munkahely(original)
     if choice == 6:
-        print(f"Régi munkahely címe: {original.munkahely_cim}")
-        original.munkahely_cim = input("Új munkahely címe? ")
+        modify_munkahely_cim(original)
     if choice == 7:
-        print(f"BME-s tanuló: {original.bme_tanulo}")
-        original.bme_tanulo = input("BME-s tanuló? ")
+        modify_tanulo(original)
+    return
+
+
+def modify_vezetek(original):
+    print(f"Régi vezetéknév: {original.vezetek}")
+    original.vezetek = input("Új vezetéknév? ")
+    return
+
+
+def modify_kereszt(original):
+    print(f"Régi keresztnev: {original.kereszt}")
+    original.keresz = input("Új keresztnév? ")
+    return
+
+
+def modify_nem(original):
+    print(f"Régi neme: {original.nem}")
+    original.nem = input("Új nem? ")
+    return
+
+
+def modify_telefon_szam(original):
+    print(f"Régi telefonszám: {original.szam}")
+    original.szam = input("Új telefonszám? ? ")
+    return
+
+
+def modify_munkahely(original):
+    print(f"Régi munkahely: {original.munkahely}")
+    original.munkahely = input("Új munkahely? ")
+    return
+
+
+def modify_munkahely_cim(original):
+    print(f"Régi munkahely címe: {original.munkahely_cim}")
+    original.munkahely_cim = input("Új munkahely címe? ")
+    return
+
+
+def modify_tanulo(original):
+    print(f"BME-s tanuló: {original.bme_tanulo}")
+    original.bme_tanulo = input("BME-s tanuló? ")
     return
