@@ -1,4 +1,5 @@
 import csv
+import re
 import people
 
 
@@ -126,4 +127,48 @@ def modify_munkahely_cim(original):
 def modify_tanulo(original):
     print(f"BME-s tanuló: {original.bme_tanulo}")
     original.bme_tanulo = input("BME-s tanuló? ")
+    return
+
+def keres(db):
+    while True:
+        print("Mi alapján szeretne keresni?")
+        print(" 1 - Név\n 2 - Telefonszám")
+        opcio = int(input("? "))
+        if opcio == 1:
+            keres_nev(db)
+        if opcio ==2:
+            keres_szam(db)
+        kilep = input("Szeretne tovaább keresni? I/N? ")
+        if kilep.lower() == "n":
+            break
+        else:
+            continue
+
+
+def keres_nev(db):
+    nev = input("kérem a nevet: ")
+    if "*" in nev:
+        nev.split("*")
+        pattern = nev[0]+".*."+nev[1]
+    else:
+        pattern = nev
+    for i in db:
+        if re.search(pattern,i.nev):
+            print(i)
+    else:
+        print("Nincs találat")
+    return
+
+def keres_szam(db):
+    szam = input("Kérem a számot: ")
+    if "*" in szam:
+        szam.split("*")
+        pattern = szam[0]+".*."+szam[1]
+    else:
+        pattern = szam
+    for i in db:
+        if re.search(pattern,i.szam):
+            print(i)
+    else:
+        print("Nincs találat")
     return

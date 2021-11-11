@@ -7,6 +7,7 @@ class People:
         self.munkahely = munkahely
         self.munkahely_cim = munkahely_cim
         self.bme_tanulo = bme_tanulo
+        self.nev = vezetek + kereszt
 
     def __str__(self):
         return f"====================================\n" \
