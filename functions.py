@@ -159,10 +159,10 @@ def keres(db):
         if opcio == 2:
             keres_szam(db)
         kilep = input("Szeretne tovaább keresni? I/N? ")
-        if kilep.lower() == "n":
-            break
-        else:
+        if kilep.lower() == "I":
             continue
+        else:
+            break
 
 
 def keres_nev(db):
@@ -174,10 +174,9 @@ def keres_nev(db):
     else:
         pattern = nev
     for i in db:
-        if re.search(pattern, i.nev):
+        if re.search(pattern.lower(), i.nev.lower()):
             print(i)
-    else:
-        print("Nincs találat")
+
     return
 
 
@@ -192,6 +191,5 @@ def keres_szam(db):
     for i in db:
         if re.search(pattern, i.szam):
             print(i)
-    else:
-        print("Nincs találat")
+
     return
