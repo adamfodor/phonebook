@@ -3,6 +3,7 @@ import functions
 
 def main():
     db = functions.load()
+    print(db.sort(key=lambda x :x.vezetek))
     print("Telefon könyv")
     while True:
         print("\nOpciok:\t1 - Rekordok listázása\n\t\t2 - Rekord hozzáadása\n\t\t"
@@ -23,9 +24,9 @@ def main():
                     functions.delete_record(db)
                 if option == 4:
                     functions.modify(db)
-                if option ==5:
+                if option == 5:
                     functions.keres(db)
-                if option ==6:
+                if option == 6:
                     print("ez a funkcio meg nem mukodik")
             else:
                 print("0-6-ig válasszon")

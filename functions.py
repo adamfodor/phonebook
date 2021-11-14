@@ -1,11 +1,15 @@
 import csv
 import re
+import os
 import people
 
 
 def list_all(db):
+    clear()
     for i, data in enumerate(db):
         print(f'{i + 1}. {data}')
+    else:
+        print("Nincsen tárolt rekord")
     return
 
 
@@ -25,7 +29,12 @@ def save(db):
     return
 
 
+def clear():
+    os.system('cls')
+
+
 def add_record():
+    clear()
     vezetek = input("Vezeteknév? ")
     while True:
         kereszt = input("Keresztnév? ")
@@ -44,6 +53,7 @@ def add_record():
 
 
 def delete_record(db):
+    clear()
     list_all(db)
 
     index = int(input("Melyiket szeretne törölni? (sorszamot) "))
@@ -52,6 +62,7 @@ def delete_record(db):
 
 
 def modify(db):
+    clear()
     list_all(db)
     index = int(input("Melyiket szeretne szerkeszteni? (sorszamot) "))
     original = db[index - 1]
@@ -66,6 +77,7 @@ def modify(db):
 
 
 def choice(original):
+    clear()
     print("Mit szeretne szerkeszteni?")
     print(
         "1 - Vezetéknév\n2 - Keresztnév\n3 - Nem\n4 - Telefon szám\n5 - Munkahely\n6 - Munkahely címe\n7 - BME-n tanul")
@@ -89,24 +101,28 @@ def choice(original):
 
 
 def modify_vezetek(original):
+    clear()
     print(f"Régi vezetéknév: {original.vezetek}")
     original.vezetek = input("Új vezetéknév? ")
     return
 
 
 def modify_kereszt(original):
+    clear()
     print(f"Régi keresztnev: {original.kereszt}")
     original.keresz = input("Új keresztnév? ")
     return
 
 
 def modify_nem(original):
+    clear()
     print(f"Régi neme: {original.nem}")
     original.nem = input("Új nem? ")
     return
 
 
 def modify_telefon_szam(original):
+    clear()
     print(f"Régi telefonszám: {original.szam}")
     original.szam = input("Új telefonszám? ? ")
     return
@@ -119,24 +135,28 @@ def modify_munkahely(original):
 
 
 def modify_munkahely_cim(original):
+    clear()
     print(f"Régi munkahely címe: {original.munkahely_cim}")
     original.munkahely_cim = input("Új munkahely címe? ")
     return
 
 
 def modify_tanulo(original):
+    clear()
     print(f"BME-s tanuló: {original.bme_tanulo}")
     original.bme_tanulo = input("BME-s tanuló? ")
     return
 
+
 def keres(db):
+    clear()
     while True:
         print("Mi alapján szeretne keresni?")
         print(" 1 - Név\n 2 - Telefonszám")
         opcio = int(input("? "))
         if opcio == 1:
             keres_nev(db)
-        if opcio ==2:
+        if opcio == 2:
             keres_szam(db)
         kilep = input("Szeretne tovaább keresni? I/N? ")
         if kilep.lower() == "n":
@@ -146,28 +166,31 @@ def keres(db):
 
 
 def keres_nev(db):
+    clear()
     nev = input("kérem a nevet: ")
     if "*" in nev:
         nev.split("*")
-        pattern = nev[0]+".*."+nev[1]
+        pattern = nev[0] + ".*." + nev[1]
     else:
         pattern = nev
     for i in db:
-        if re.search(pattern,i.nev):
+        if re.search(pattern, i.nev):
             print(i)
     else:
         print("Nincs találat")
     return
 
+
 def keres_szam(db):
+    clear()
     szam = input("Kérem a számot: ")
     if "*" in szam:
         szam.split("*")
-        pattern = szam[0]+".*."+szam[1]
+        pattern = szam[0] + ".*." + szam[1]
     else:
         pattern = szam
     for i in db:
-        if re.search(pattern,i.szam):
+        if re.search(pattern, i.szam):
             print(i)
     else:
         print("Nincs találat")
