@@ -3,7 +3,7 @@ import functions
 
 def main():
     db = functions.load()
-    print(db.sort(key=lambda x :x.vezetek))
+    db.sort(key=lambda x: x.vezetek)
     print("Telefon könyv")
     while True:
         print("\nOpciok:\t1 - Rekordok listázása\n\t\t2 - Rekord hozzáadása\n\t\t"
