@@ -1,8 +1,8 @@
 import functions
-
+import file_handle
 
 def main():
-    db = functions.load()
+    db = file_handle.load()
     db.sort(key=lambda x: x.vezetek)
     print("Telefon könyv")
     while True:
@@ -14,7 +14,7 @@ def main():
             if 6 >= int(option) >= 0:
 
                 if option == 0:
-                    functions.save(db)
+                    file_handle.save(db)
                     break
                 if option == 1:
                     functions.list_all(db)
@@ -27,7 +27,7 @@ def main():
                 if option == 5:
                     functions.keres(db)
                 if option == 6:
-                    print("ez a funkcio meg nem mukodik")
+                    functions.vcard(db)
             else:
                 print("0-6-ig válasszon")
         else:

@@ -1,31 +1,17 @@
-import csv
-import re
 import os
+import re
+import file_handle
 import people
 
 
 def list_all(db):
     clear()
-    for i, data in enumerate(db):
-        print(f'{i + 1}. {data}')
-    else:
+    if len(db) == 0:
         print("Nincsen tárolt rekord")
-    return
+    else:
+        for i, data in enumerate(db):
+            print(f'{i + 1}. {data}')
 
-
-def load():
-    db = []
-    with open("db.csv", "r", encoding="UTF-8") as f:
-        reader = csv.reader(f)
-        for i in reader:
-            db.append(people.People(i[0], i[1], i[2], i[3], i[4], i[5], i[6]))
-    return db
-
-
-def save(db):
-    with open("db.csv", "w", encoding="UTF-8") as f:
-        for i in db:
-            f.write(f"{i.vezetek},{i.kereszt},{i.nem},{i.szam},{i.munkahely},{i.munkahely_cim},{i.bme_tanulo}\n")
     return
 
 
@@ -163,6 +149,7 @@ def keres(db):
             continue
         else:
             break
+    return
 
 
 def keres_nev(db):
@@ -192,4 +179,13 @@ def keres_szam(db):
         if re.search(pattern, i.szam):
             print(i)
 
+    return
+
+def vcard(db):
+    print("1 - Exportálni vCard-ba\n2 - Importálni vCard-ból\n0 - Vissza")
+    opcio = int(input("Mit szeretne csinlni? "))
+    if opcio == 0:
+        return
+    if opcio == 1:
+        file_handle.write(db)
     return
