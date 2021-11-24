@@ -1,6 +1,7 @@
 import functions
 import file_handle
 
+
 def main():
     db = file_handle.load()
     db.sort(key=lambda x: x.vezetek)

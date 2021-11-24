@@ -188,4 +188,7 @@ def vcard(db):
         return
     if opcio == 1:
         file_handle.write(db)
+    if opcio ==2:
+        file_name = str(input("Mi a fájl neve? "))
+        db.append(file_handle.read(file_name))
     return

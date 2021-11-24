@@ -17,9 +17,20 @@ def save(db):
             f.write(f"{i.vezetek},{i.kereszt},{i.nem},{i.szam},{i.munkahely},{i.munkahely_cim},{i.bme_tanulo}\n")
     return
 
-def read():
-    with open("output.vcf", "rt") as f:
-        print(f.read())
+def read(file):
+    data =[]
+    with open(file, "rt") as f:
+        for row in f:
+            row= row.split(":")[1].strip("\n")
+            data.append(row)
+    nev = data[2].split(";")
+    vezetek = nev[0]
+    kereszt = nev[1]
+
+    nem = data[4]
+    szam = data[5]
+    munkahely = data[6]
+    return (people.People(vezetek,kereszt,nem,szam,munkahely,"-","-"))
 
 
 def write(db):
@@ -35,3 +46,4 @@ def write(db):
         f.write(f"ORG:{rekord.munkahely}\n")
         f.write("END:VCARD")
     return
+
