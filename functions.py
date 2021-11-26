@@ -41,24 +41,39 @@ def add_record():
 def delete_record(db):
     clear()
     list_all(db)
+    if len(db) == 0:
+        return
+    index = input("Melyiket szeretné törölni? (indexet irjon)")
+    if valid(index,db):
+        index = int(index)
+        db.pop(int(index)-1)
+    else:
+        error()
+        return
 
-    index = int(input("Melyiket szeretne törölni? (sorszamot) "))
-    db.pop(index - 1)
     return db
 
 
 def modify(db):
     clear()
     list_all(db)
-    index = int(input("Melyiket szeretne szerkeszteni? (sorszamot) "))
-    original = db[index - 1]
-    choice(original)
-    while True:
-        valasztas = input("Szeretne mást is modositani? I/N").lower()
-        if valasztas == "i":
+    if len(db) == 0:
+        return
+    else:
+        index = input("Melyiket szeretne szerkeszteni? (sorszamot) ")
+        if valid(index, db):
+            original = db[int(index) - 1]
             choice(original)
         else:
-            break
+            error()
+            return
+
+        while True:
+            valasztas = input("Szeretne mást is modositani? I/N ").lower()
+            if valasztas == "i":
+                choice(original)
+            else:
+                break
     return db
 
 
@@ -66,9 +81,16 @@ def choice(original):
     clear()
     print("Mit szeretne szerkeszteni?")
     print(
-        "1 - Vezetéknév\n2 - Keresztnév\n3 - Nem\n4 - Telefon szám\n5 - Munkahely\n6 - Munkahely címe\n7 - BME-n tanul")
+        "1 - Vezetéknév\n2 - Keresztnév\n3 - Nem\n4 - Telefon szám\n5 - Munkahely\n"
+        "6 - Munkahely címe\n7 - BME-n tanul\n0 - Vissza")
     print("===========")
-    choice = int(input("Melyiket szeretne modositani? "))
+    choice = input("Melyiket szeretne modositani? ")
+    if valid(choice, 7):
+        choice = int(choice)
+    else:
+        error()
+        return
+
     if choice == 1:
         modify_vezetek(original)
     if choice == 2:
@@ -83,6 +105,8 @@ def choice(original):
         modify_munkahely_cim(original)
     if choice == 7:
         modify_tanulo(original)
+    if choice == 0:
+        return
     return
 
 
@@ -115,6 +139,7 @@ def modify_telefon_szam(original):
 
 
 def modify_munkahely(original):
+    clear()
     print(f"Régi munkahely: {original.munkahely}")
     original.munkahely = input("Új munkahely? ")
     return
@@ -138,17 +163,23 @@ def keres(db):
     clear()
     while True:
         print("Mi alapján szeretne keresni?")
-        print(" 1 - Név\n 2 - Telefonszám")
-        opcio = int(input("? "))
-        if opcio == 1:
-            keres_nev(db)
-        if opcio == 2:
-            keres_szam(db)
-        kilep = input("Szeretne tovaább keresni? I/N? ")
-        if kilep.lower() == "I":
-            continue
+        print(" 1 - Név\n 2 - Telefonszám\n 0 - Vissza")
+        opcio = input("Választás:  ")
+        if valid(opcio,2):
+            if opcio == 1:
+                keres_nev(db)
+            if opcio == 2:
+                keres_szam(db)
+            if opcio == 0:
+                break
         else:
+            error()
+            return
+        kilep = input("Szeretne tovaább keresni? I/N? ")
+        if kilep.lower() == "n":
             break
+        else:
+            continue
     return
 
 
@@ -181,14 +212,40 @@ def keres_szam(db):
 
     return
 
+
 def vcard(db):
     print("1 - Exportálni vCard-ba\n2 - Importálni vCard-ból\n0 - Vissza")
-    opcio = int(input("Mit szeretne csinlni? "))
-    if opcio == 0:
-        return
-    if opcio == 1:
-        file_handle.write(db)
-    if opcio ==2:
-        file_name = str(input("Mi a fájl neve? "))
-        db.append(file_handle.read(file_name))
+    opcio =(input("Mit szeretne csinlni? "))
+    if valid(opcio,2):
+        opcio = int(opcio)
+        if opcio == 0:
+            return
+        if opcio == 1:
+            file_handle.write(db)
+        if opcio == 2:
+            file_name = str(input("Mi a fájl neve? "))
+            file_handle.read(db, file_name)
+    else:
+        error()
     return
+
+
+def error():
+    print("Hiba történt")
+    print(
+        "Nem számot tetszett beirni, számot irjon vagy olyan elemet probált meg választani ami nincs a tárolt adatok között")
+    print("Kérem probálja újra")
+    return
+
+
+def valid(x, db):
+    try:
+        int(x)
+        if isinstance(db, list):
+            if 0 <= int(x) <= len(db):
+                return True
+        else:
+            if 0 <= int(x) <= db:
+                return True
+    except:
+        return False

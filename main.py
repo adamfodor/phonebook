@@ -4,7 +4,7 @@ import file_handle
 
 def main():
     db = file_handle.load()
-    db.sort(key=lambda x: x.vezetek)
+
     print("Telefon könyv")
     while True:
         print("\nOpciok:\t1 - Rekordok listázása\n\t\t2 - Rekord hozzáadása\n\t\t"
