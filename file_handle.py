@@ -51,4 +51,5 @@ def write(db):
         f.write(f"TEL:{rekord.szam}\n")
         f.write(f"ORG:{rekord.munkahely}\n")
         f.write("END:VCARD")
+        print("Sikeresen exportalva a output.vcf nevu fájlba")
     return

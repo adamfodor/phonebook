@@ -43,7 +43,7 @@ def delete_record(db):
     list_all(db)
     if len(db) == 0:
         return
-    index = input("Melyiket szeretné törölni? (indexet irjon)")
+    index = input("Melyiket szeretné törölni? (indexet irjon) ")
     if valid(index,db):
         index = int(index)
         db.pop(int(index)-1)
@@ -68,12 +68,6 @@ def modify(db):
             error()
             return
 
-        while True:
-            valasztas = input("Szeretne mást is modositani? I/N ").lower()
-            if valasztas == "i":
-                choice(original)
-            else:
-                break
     return db
 
 
@@ -166,6 +160,7 @@ def keres(db):
         print(" 1 - Név\n 2 - Telefonszám\n 0 - Vissza")
         opcio = input("Választás:  ")
         if valid(opcio,2):
+            opcio = int(opcio)
             if opcio == 1:
                 keres_nev(db)
             if opcio == 2:
